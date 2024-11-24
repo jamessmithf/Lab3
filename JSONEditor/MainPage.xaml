@@ -1,0 +1,77 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="JSONEditor.MainPage"
+             Padding="10"
+             NavigationPage.HasNavigationBar="False">
+
+    <ScrollView>
+        <Grid RowSpacing="15" ColumnSpacing="15" Padding="15" RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto,*" ColumnDefinitions="*,*,*,*,*,*,*,*,*">
+            <Button Grid.Row="0" Grid.Column="0" BackgroundColor="#7A93AC" TextColor="White" CornerRadius="0" Text="Обрати файл" Clicked="OpenFileHandler"/>
+            <Button Grid.Row="0" Grid.Column="1" BackgroundColor="#92BCEA" TextColor="White" CornerRadius="0" Text="Інформація" Clicked="InfoButtonHandler" />
+
+            <Frame Grid.Row="0" Grid.Column="2" Grid.ColumnSpan="7" CornerRadius="0" BackgroundColor="#AFB3F7">
+                <StackLayout>
+                    <Label LineBreakMode="WordWrap" x:Name="FilePathLabel" Text="Файл не обраний" FontAttributes="Bold" FontSize="20" HorizontalTextAlignment="Center" VerticalOptions="Center"/>
+                </StackLayout>
+            </Frame>
+
+            <Frame Grid.Row="1" Grid.Column="6" Grid.RowSpan="6" Grid.ColumnSpan="3" BorderColor="Grey" CornerRadius="0">
+                <Grid RowDefinitions="*,*,*,*,*,*,*" ColumnDefinitions="Auto, *" ColumnSpacing="10" RowSpacing="10">
+                    <Label Grid.Row="0" Grid.Column="0" WidthRequest="100" Text="Модель:" FontSize="20" HorizontalOptions="Center" VerticalOptions="Center" />
+                    <Label Grid.Row="1" Grid.Column="0" WidthRequest="100" Text="Рама:" FontSize="20" HorizontalOptions="Center" VerticalOptions="Center" />
+                    <Label Grid.Row="2" Grid.Column="0" WidthRequest="100" Text="Колеса:" FontSize="20" HorizontalOptions="Center" VerticalOptions="Center" />
+                    <Label Grid.Row="3" Grid.Column="0" WidthRequest="100" Text="Вага:" FontSize="20" HorizontalOptions="Center" VerticalOptions="Center" />
+                    <Label Grid.Row="4" Grid.Column="0" WidthRequest="100" Text="Тип:" FontSize="20" HorizontalOptions="Center" VerticalOptions="Center" />
+                    <Label Grid.Row="5" Grid.Column="0" WidthRequest="100" Text="Опис:" FontSize="20" HorizontalOptions="Center" VerticalOptions="Center" />
+
+                    <Entry Grid.Row="0" Grid.Column="1" x:Name="ModelEntry" PlaceholderColor="#7A93AC" Placeholder="Ввести модель велосипеда" />
+                    <Entry Grid.Row="1" Grid.Column="1" x:Name="FrameMaterialEntry" PlaceholderColor="#7A93AC" Placeholder="Ввести матеріал рами" />
+                    <Entry Grid.Row="2" Grid.Column="1" x:Name="WheelDiameterEntry" PlaceholderColor="#7A93AC" Placeholder="Ввести діаметр коліс" />
+                    <Entry Grid.Row="3" Grid.Column="1" x:Name="WeightEntry" PlaceholderColor="#7A93AC" Placeholder="Ввести вагу велосипеда" />
+                    <Entry Grid.Row="4" Grid.Column="1" x:Name="TypeEntry" PlaceholderColor="#7A93AC" Placeholder="Ввести тип велосипеда" />
+                    <Entry Grid.Row="5" Grid.Column="1" x:Name="DescriptionEntry" PlaceholderColor="#7A93AC" Placeholder="Ввести опис велосипеда" />
+
+                    <Grid Grid.Row="6" Grid.ColumnSpan="2" ColumnDefinitions="*,*" ColumnSpacing="10">
+                        <Button Grid.Column="0" BackgroundColor="#7A93AC" TextColor="White" CornerRadius="0" Text="Пошук" Clicked="SearchHandler" />
+                        <Button Grid.Column="1" BackgroundColor="#92BCEA" TextColor="White" CornerRadius="0" Text="Очистити" Clicked="ClearFiltersHander" />
+                    </Grid>
+                </Grid>
+            </Frame>
+
+            <Frame x:Name="BikeList" Grid.Row="1" Grid.Column="0" Grid.RowSpan="6" Grid.ColumnSpan="6" CornerRadius="0" BorderColor="Gray" VerticalOptions="Start" HorizontalOptions="Fill">
+                <Grid RowDefinitions="Auto,*">
+                    <Grid RowDefinitions="Auto,Auto" ColumnDefinitions="1.5*,*,0.8*,0.8*,*,*,1.5*" ColumnSpacing="10">
+                        <Label Grid.Row="0" Grid.Column="0" VerticalOptions="Center" HorizontalOptions="Start" Text="Модель" FontAttributes="Bold" />
+                        <Label Grid.Row="0" Grid.Column="1" VerticalOptions="Center" HorizontalOptions="Start" Text="Рама" FontAttributes="Bold" />
+                        <Label Grid.Row="0" Grid.Column="2" VerticalOptions="Center" HorizontalOptions="Start" Text="Колеса" FontAttributes="Bold" />
+                        <Label Grid.Row="0" Grid.Column="3" VerticalOptions="Center" HorizontalOptions="Start" Text="Вага" FontAttributes="Bold" />
+                        <Label Grid.Row="0" Grid.Column="4" VerticalOptions="Center" HorizontalOptions="Start" Text="Тип" FontAttributes="Bold" />
+                        <Label Grid.Row="0" Grid.Column="5" Grid.ColumnSpan="2" VerticalOptions="Center" HorizontalOptions="Start" Text="Опис" FontAttributes="Bold" />
+                        <Button Grid.Row="0" Grid.Column="6" BackgroundColor="#617073" TextColor="White" CornerRadius="0" Text="+ Велосипед" Clicked="AddBikeHandler"/>
+                        <BoxView Grid.Row="1" Grid.ColumnSpan="7" HeightRequest="1" BackgroundColor="Gray" Margin="0,10,0,10" />
+                    </Grid>
+
+                    <CollectionView Grid.Row="1" x:Name="BikesCollectionView" ItemsSource="{Binding BikesCollection}" SelectionMode="None">
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <Grid RowDefinitions="Auto,Auto" ColumnDefinitions="1.5*,*,0.8*,0.8*,*,*,1.5*" ColumnSpacing="10">
+                                    <Label Grid.Row="0" Grid.Column="0" VerticalOptions="Center" HorizontalOptions="Start" Text="{Binding Model}" />
+                                    <Label Grid.Row="0" Grid.Column="1" VerticalOptions="Center" HorizontalOptions="Start" Text="{Binding FrameMaterial}" />
+                                    <Label Grid.Row="0" Grid.Column="2" VerticalOptions="Center" HorizontalOptions="Start" Text="{Binding WheelDiameter}" />
+                                    <Label Grid.Row="0" Grid.Column="3" VerticalOptions="Center" HorizontalOptions="Start" Text="{Binding Weight}" />
+                                    <Label Grid.Row="0" Grid.Column="4" VerticalOptions="Center" HorizontalOptions="Start" Text="{Binding Type}" />
+                                    <Button Grid.Row="0" Grid.Column="5" Text="Глянути" BackgroundColor="#92BCEA" Clicked="ViewDescriptionHandler" HeightRequest="10" CornerRadius="0" />
+                                    <Button Grid.Row="0" Grid.Column="6" Text="Редагувати" BackgroundColor="#7A93AC" Clicked="EditBikeHandler" HeightRequest="10" CornerRadius="0" />
+                                    <BoxView Grid.Row="1" Grid.ColumnSpan="6" HeightRequest="10" BackgroundColor="Transparent"/>
+                                </Grid>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </Grid>
+            </Frame> 
+        </Grid>
+
+    </ScrollView>
+
+</ContentPage>
