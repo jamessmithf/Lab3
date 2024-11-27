@@ -3,7 +3,7 @@
     "Model": "Cube Aim SLX",
     "FrameMaterial": "Алюміній",
     "WheelDiameter": "29",
-    "Weight": "13.8 кг",
+    "Weight": "13,8",
     "Type": "Гірський",
     "Description": "Ця модель із обладнанням від японського виробника Shimano, яка має 16 швидкостей. Велосипед оснащений потужними гідравлічними дисковими гальмами і якісними покришками від Cube."
   },
@@ -11,7 +11,7 @@
     "Model": "Trek Marlin 7",
     "FrameMaterial": "Алюміній",
     "WheelDiameter": "29",
-    "Weight": "13.6 кг",
+    "Weight": "14,5",
     "Type": "Гірський",
     "Description": "Один із популярних гірських велосипедів із амортизаційною вилкою RockShox, трансмісією Shimano Deore на 10 швидкостей та надійними гідравлічними гальмами."
   },
@@ -19,7 +19,7 @@
     "Model": "Specialized Rockhopper Expert",
     "FrameMaterial": "Алюміній",
     "WheelDiameter": "29",
-    "Weight": "13.2 кг",
+    "Weight": "13,2",
     "Type": "Гірський",
     "Description": "Велосипед із якісною трансмісією Shimano SLX та повітряною вилкою SR Suntour, який ідеально підходить для катання на пересіченій місцевості."
   },
@@ -27,15 +27,15 @@
     "Model": "Cannondale Quick CX 4",
     "FrameMaterial": "Алюміній",
     "WheelDiameter": "28",
-    "Weight": "12.5 кг",
+    "Weight": "12,5",
     "Type": "Кросовий",
     "Description": "Легкий і універсальний велосипед, оснащений вилкою з амортизацією, трансмісією Shimano Altus і міцними колесами для міста або легкого бездоріжжя."
   },
   {
     "Model": "Giant Talon 2",
     "FrameMaterial": "Алюміній",
-    "WheelDiameter": "27.5",
-    "Weight": "13.4 кг",
+    "WheelDiameter": "27,5",
+    "Weight": "13,4",
     "Type": "Гірський",
     "Description": "Цей велосипед має трансмісію Shimano Altus/Alivio з 18 швидкостями, дискові гідравлічні гальма та чудово підійде для початківців у гірському катанні."
   },
@@ -43,7 +43,7 @@
     "Model": "Merida Scultura 400",
     "FrameMaterial": "Алюміній",
     "WheelDiameter": "28",
-    "Weight": "8.9 кг",
+    "Weight": "14,5",
     "Type": "Шосейний",
     "Description": "Шосейний велосипед із якісною трансмісією Shimano 105, карбоновою вилкою та легким алюмінієвим каркасом для високих швидкостей на дорозі."
   },
@@ -51,7 +51,7 @@
     "Model": "Scott Scale 970",
     "FrameMaterial": "Алюміній",
     "WheelDiameter": "29",
-    "Weight": "12.9 кг",
+    "Weight": "12.9",
     "Type": "Гірський",
     "Description": "Велосипед із повітряною вилкою RockShox Judy, трансмісією SRAM SX Eagle з 12 швидкостями та гідравлічними гальмами Shimano MT200."
   },
@@ -59,7 +59,7 @@
     "Model": "BMC Alpenchallenge AMP City",
     "FrameMaterial": "Алюміній",
     "WheelDiameter": "28",
-    "Weight": "17.2 кг",
+    "Weight": "17.2",
     "Type": "Електричний",
     "Description": "Сучасний електровелосипед для міста з двигуном Shimano Steps E6100, діапазоном до 100 км та інтегрованими LED-вогнями."
   },
@@ -67,7 +67,7 @@
     "Model": "Kona Dew Plus",
     "FrameMaterial": "Алюміній",
     "WheelDiameter": "28",
-    "Weight": "13.2 кг",
+    "Weight": "13.2",
     "Type": "Гібридний",
     "Description": "Комфортний велосипед із трансмісією Shimano Altus на 9 швидкостей, міцною рамою та гідравлічними дисковими гальмами."
   },
@@ -75,7 +75,7 @@
     "Model": "Orbea Alma H30",
     "FrameMaterial": "Алюміній",
     "WheelDiameter": "30",
-    "Weight": "12.7 кг",
+    "Weight": "12.7",
     "Type": "Гірський",
     "Description": "Цей велосипед оснащений трансмісією Shimano SLX, повітряною вилкою RockShox та чудово підходить для крос-кантрі."
   }

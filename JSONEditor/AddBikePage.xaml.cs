@@ -1,4 +1,5 @@
-﻿using System.Text.Json;
+﻿using System.Collections.ObjectModel;
+using System.Text.Json;
 
 namespace JSONEditor;
 
@@ -12,11 +13,16 @@ public partial class AddBikePage : ContentPage
     /* Дія кнопки "Зберегти" */
     private async void SaveButtonHandler(object sender, EventArgs e)
     {
-        // Перевірка на створення "пустого велосипеда"
-        if (new[] { ModelEntry.Text, FrameMaterialEntry.Text, WheelDiameterEntry.Text, WeightEntry.Text, DescriptionEntry.Text }
-            .All(string.IsNullOrWhiteSpace))
+        // Перевірка на валідність значень в обов'язкових полях
+        if (!RefactoryHelper.IsInvalidInputFieldsAlert(this, ModelEntry, WheelDiameterEntry, WeightEntry)[0])
         {
-            await DisplayAlert("Попередження!", "Не можливо додати велосипед без даних.\nНеобхідно заповнити принаймні одне поле", "ОК");
+            await DisplayAlert("Попередження!", "Необхідно заповнити кожне з трьох обов'язкових полів:" +
+            "\n\'Модель\', \'Діаметр коліс\' та \'Вага\'", "ОК");
+            return;
+        }
+        else if (!RefactoryHelper.IsInvalidInputFieldsAlert(this, ModelEntry, WheelDiameterEntry, WeightEntry)[1])
+        {
+            await DisplayAlert("Попередження!", "Поля: \'Діаметр коліс\' та \'Вага\' повинні містити числові значення більші 0", "ОК");
             return;
         }
 
@@ -27,30 +33,34 @@ public partial class AddBikePage : ContentPage
             FrameMaterial = FrameMaterialEntry.Text?.Trim(),
             WheelDiameter = WheelDiameterEntry.Text?.Trim(),
             Weight = WeightEntry.Text?.Trim(),
+            Type = TypeEntry.Text?.Trim(),
             Description = DescriptionEntry.Text?.Trim()
         };
 
         // Завантаження існуючих велосипедів з файлу
         var filePath = Path.Combine(FileSystem.AppDataDirectory, MainPage.FilePath);
-        List<Bike> bikesList;
+        ObservableCollection<Bike> bikesList;
 
         if (File.Exists(filePath))
         {
             var json = await File.ReadAllTextAsync(filePath);
-            bikesList = JsonSerializer.Deserialize<List<Bike>>(json);
+            bikesList = JsonSerializer.Deserialize<ObservableCollection<Bike>>(json);
         }
-        else bikesList = new List<Bike>();
+        else bikesList = new ObservableCollection<Bike>();
 
         // Додавання нового велосипеда до списку
         bikesList.Add(newBike);
 
         // Збереження оновленого списку у файл
-        var updatedJson = JsonSerializer.Serialize(bikesList, new JsonSerializerOptions
+        try
         {
-            WriteIndented = true,
-            Encoder = System.Text.Encodings.Web.JavaScriptEncoder.UnsafeRelaxedJsonEscaping
-        });
-        await File.WriteAllTextAsync(filePath, updatedJson);
+            RefactoryHelper.RewriteJson(bikesList);
+        }
+        catch (Exception ex)
+        {
+            await DisplayAlert("Помлкка", "Під час " +
+                                   "\nПеревірте чи не пошкоджений файл та спробуйте ще раз", "ОК");
+        }
 
         // Повернення до головної сторінки
         await Navigation.PopAsync();

@@ -11,10 +11,10 @@
                 <StackLayout>
                     <Label Text="Редагування велосипеда" FontSize="36" FontAttributes="Bold" HorizontalTextAlignment="Center" VerticalOptions="Center" />
                     <Grid RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto,*" ColumnDefinitions="Auto,*" RowSpacing="15" ColumnSpacing="15" VerticalOptions="Center" HorizontalOptions="Center">
-                        <Label Grid.Row="1" Grid.Column="0" Text="Модель:" WidthRequest="100" FontSize="20" VerticalOptions="Center" HorizontalOptions="Center"/>
+                        <Label Grid.Row="1" Grid.Column="0" Text="Модель*:" WidthRequest="100" FontSize="20" VerticalOptions="Center" HorizontalOptions="Center"/>
                         <Label Grid.Row="2" Grid.Column="0" Text="Матеріал рами:" WidthRequest="100" FontSize="20" VerticalOptions="Center" HorizontalOptions="Center"/>
-                        <Label Grid.Row="3" Grid.Column="0" Text="Діаметр коліс:" WidthRequest="100" FontSize="20" VerticalOptions="Center" HorizontalOptions="Center"/>
-                        <Label Grid.Row="4" Grid.Column="0" Text="Вага:" WidthRequest="100" FontSize="20" VerticalOptions="Center" HorizontalOptions="Center"/>
+                        <Label Grid.Row="3" Grid.Column="0" Text="Діаметр коліс*:" WidthRequest="100" FontSize="20" VerticalOptions="Center" HorizontalOptions="Center"/>
+                        <Label Grid.Row="4" Grid.Column="0" Text="Вага(кг)*:" WidthRequest="100" FontSize="20" VerticalOptions="Center" HorizontalOptions="Center"/>
                         <Label Grid.Row="5" Grid.Column="0" Text="Тип:" WidthRequest="100" FontSize="20" VerticalOptions="Center" HorizontalOptions="Center"/>
                         <Label Grid.Row="6" Grid.Column="0" Text="Опис:" WidthRequest="100" FontSize="20" VerticalOptions="Center" HorizontalOptions="Center"/>
 
@@ -22,7 +22,7 @@
                         <Entry WidthRequest="600" BackgroundColor="White" x:Name="FrameMaterialEntry" Text="{Binding FrameMaterial}" Grid.Row="2" Grid.Column="1" HorizontalOptions="Center"/>
                         <Entry WidthRequest="600" BackgroundColor="White" x:Name="WheelDiameterEntry" Text="{Binding WheelDiameter}" Grid.Row="3" Grid.Column="1" HorizontalOptions="Center"/>
                         <Entry WidthRequest="600" BackgroundColor="White" x:Name="WeightEntry" Text="{Binding Weight}" Grid.Row="4" Grid.Column="1" HorizontalOptions="Center"/>
-                        <Entry WidthRequest="600" BackgroundColor="White" x:Name="TypeEntry" Text="{Binding Weight}" Grid.Row="5" Grid.Column="1" HorizontalOptions="Center"/>
+                        <Entry WidthRequest="600" BackgroundColor="White" x:Name="TypeEntry" Text="{Binding Type}" Grid.Row="5" Grid.Column="1" HorizontalOptions="Center"/>
                         <Entry WidthRequest="600" BackgroundColor="White" x:Name="DescriptionEntry" Text="{Binding Description}" Grid.Row="6" Grid.Column="1"  HorizontalOptions="Center"/>
                     </Grid>
                 </StackLayout>

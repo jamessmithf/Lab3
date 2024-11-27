@@ -10,18 +10,20 @@
             <Frame CornerRadius="0" BackgroundColor="#AFB3F7" >
                 <StackLayout>
                     <Label Text="Додайте новий велосипед" FontSize="36" FontAttributes="Bold" HorizontalTextAlignment="Center" VerticalOptions="Center" />
-                    <Grid RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,*" ColumnDefinitions="Auto,*" RowSpacing="15" ColumnSpacing="15" VerticalOptions="Center" HorizontalOptions="Center">
-                        <Label Grid.Row="1" Grid.Column="0" Text="Модель:" WidthRequest="100" FontSize="20" VerticalOptions="Center" HorizontalOptions="Center"/>
+                    <Grid RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto,*" ColumnDefinitions="Auto,*" RowSpacing="15" ColumnSpacing="15" VerticalOptions="Center" HorizontalOptions="Center">
+                        <Label Grid.Row="1" Grid.Column="0" Text="Модель*:" WidthRequest="100" FontSize="20" VerticalOptions="Center" HorizontalOptions="Center"/>
                         <Label Grid.Row="2" Grid.Column="0" Text="Матеріал рами:" WidthRequest="100" FontSize="20" VerticalOptions="Center" HorizontalOptions="Center"/>
-                        <Label Grid.Row="3" Grid.Column="0" Text="Діаметр коліс:" WidthRequest="100" FontSize="20" VerticalOptions="Center" HorizontalOptions="Center"/>
-                        <Label Grid.Row="4" Grid.Column="0" Text="Вага:" WidthRequest="100" FontSize="20" VerticalOptions="Center" HorizontalOptions="Center" />
-                        <Label Grid.Row="5" Grid.Column="0" Text="Опис:" WidthRequest="100" FontSize="20" VerticalOptions="Center" HorizontalOptions="Center"/>
+                        <Label Grid.Row="3" Grid.Column="0" Text="Діаметр коліс*:" WidthRequest="100" FontSize="20" VerticalOptions="Center" HorizontalOptions="Center"/>
+                        <Label Grid.Row="4" Grid.Column="0" Text="Вага(кг)*:" WidthRequest="100" FontSize="20" VerticalOptions="Center" HorizontalOptions="Center" />
+                        <Label Grid.Row="5" Grid.Column="0" Text="Тип:" WidthRequest="100" FontSize="20" VerticalOptions="Center" HorizontalOptions="Center" />
+                        <Label Grid.Row="6" Grid.Column="0" Text="Опис:" WidthRequest="100" FontSize="20" VerticalOptions="Center" HorizontalOptions="Center"/>
 
                         <Entry WidthRequest="600" BackgroundColor="White" x:Name="ModelEntry" Grid.Row="1" Grid.Column="1" HorizontalOptions="Center"/>
                         <Entry WidthRequest="600" BackgroundColor="White" x:Name="FrameMaterialEntry" Grid.Row="2" Grid.Column="1" HorizontalOptions="Center"/>
                         <Entry WidthRequest="600" BackgroundColor="White" x:Name="WheelDiameterEntry" Grid.Row="3" Grid.Column="1" HorizontalOptions="Center"/>
                         <Entry WidthRequest="600" BackgroundColor="White" x:Name="WeightEntry" Grid.Row="4" Grid.Column="1" HorizontalOptions="Center"/>
-                        <Entry WidthRequest="600" BackgroundColor="White" x:Name="DescriptionEntry" Grid.Row="5" Grid.Column="1" HorizontalOptions="Center"/>
+                        <Entry WidthRequest="600" BackgroundColor="White" x:Name="TypeEntry" Grid.Row="5" Grid.Column="1" HorizontalOptions="Center"/>
+                        <Entry WidthRequest="600" BackgroundColor="White" x:Name="DescriptionEntry" Grid.Row="6" Grid.Column="1" HorizontalOptions="Center"/>
                     </Grid>
                 </StackLayout>
             </Frame>

@@ -21,7 +21,7 @@
                     <Label Grid.Row="0" Grid.Column="0" WidthRequest="100" Text="Модель:" FontSize="20" HorizontalOptions="Center" VerticalOptions="Center" />
                     <Label Grid.Row="1" Grid.Column="0" WidthRequest="100" Text="Рама:" FontSize="20" HorizontalOptions="Center" VerticalOptions="Center" />
                     <Label Grid.Row="2" Grid.Column="0" WidthRequest="100" Text="Колеса:" FontSize="20" HorizontalOptions="Center" VerticalOptions="Center" />
-                    <Label Grid.Row="3" Grid.Column="0" WidthRequest="100" Text="Вага:" FontSize="20" HorizontalOptions="Center" VerticalOptions="Center" />
+                    <Label Grid.Row="3" Grid.Column="0" WidthRequest="100" Text="Вага(кг):" FontSize="20" HorizontalOptions="Center" VerticalOptions="Center" />
                     <Label Grid.Row="4" Grid.Column="0" WidthRequest="100" Text="Тип:" FontSize="20" HorizontalOptions="Center" VerticalOptions="Center" />
                     <Label Grid.Row="5" Grid.Column="0" WidthRequest="100" Text="Опис:" FontSize="20" HorizontalOptions="Center" VerticalOptions="Center" />
 
@@ -45,7 +45,7 @@
                         <Label Grid.Row="0" Grid.Column="0" VerticalOptions="Center" HorizontalOptions="Start" Text="Модель" FontAttributes="Bold" />
                         <Label Grid.Row="0" Grid.Column="1" VerticalOptions="Center" HorizontalOptions="Start" Text="Рама" FontAttributes="Bold" />
                         <Label Grid.Row="0" Grid.Column="2" VerticalOptions="Center" HorizontalOptions="Start" Text="Колеса" FontAttributes="Bold" />
-                        <Label Grid.Row="0" Grid.Column="3" VerticalOptions="Center" HorizontalOptions="Start" Text="Вага" FontAttributes="Bold" />
+                        <Label Grid.Row="0" Grid.Column="3" VerticalOptions="Center" HorizontalOptions="Start" Text="Вага(кг)" FontAttributes="Bold" />
                         <Label Grid.Row="0" Grid.Column="4" VerticalOptions="Center" HorizontalOptions="Start" Text="Тип" FontAttributes="Bold" />
                         <Label Grid.Row="0" Grid.Column="5" Grid.ColumnSpan="2" VerticalOptions="Center" HorizontalOptions="Start" Text="Опис" FontAttributes="Bold" />
                         <Button Grid.Row="0" Grid.Column="6" BackgroundColor="#617073" TextColor="White" CornerRadius="0" Text="+ Велосипед" Clicked="AddBikeHandler"/>

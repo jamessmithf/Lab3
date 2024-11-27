@@ -10,21 +10,8 @@ public partial class EditPage : ContentPage
     public EditPage(Bike bike)
     {
         InitializeComponent();
-
         Bike = bike;
-
         BindingContext = Bike;
-    }
-
-    /* Допоміжний метод, який перезаписує наш *.json файл */
-    private void RewriteJson(ObservableCollection<Bike> data)
-    {
-        string updatedJson = JsonSerializer.Serialize(data, new JsonSerializerOptions
-        {
-            WriteIndented = true,
-            Encoder = System.Text.Encodings.Web.JavaScriptEncoder.UnsafeRelaxedJsonEscaping
-        });
-        File.WriteAllText(MainPage.FilePath, updatedJson);
     }
 
     /* Дія кнопки "Зберегти" */
@@ -45,7 +32,7 @@ public partial class EditPage : ContentPage
                     {
                         mainPage.BikesCollection.Remove(bikeInCollection);
 
-                        RewriteJson(mainPage.BikesCollection);
+                        RefactoryHelper.RewriteJson(mainPage.BikesCollection);
 
                         await DisplayAlert("Успіх", "Велосипед видалено!", "OK");
                         await Navigation.PopAsync();
@@ -57,13 +44,29 @@ public partial class EditPage : ContentPage
                     }
                 }
 
+                // Перевірка на валідність значень в обов'язкових полях
+                if (!RefactoryHelper.IsInvalidInputFieldsAlert(this, ModelEntry, WheelDiameterEntry, WeightEntry)[0])
+                {
+                    await DisplayAlert("Попередження!", "Необхідно заповнити кожне з трьох обов'язкових полів:" +
+                    "\n\'Модель\', \'Діаметр коліс\' та \'Вага\'", "ОК");
+                    return;
+                }
+                else if (!RefactoryHelper.IsInvalidInputFieldsAlert(this, ModelEntry, WheelDiameterEntry, WeightEntry)[1])
+                {
+                    await DisplayAlert("Попередження!", "Поля: \'Діаметр коліс\' та \'Вага\' повинні містити числові значення більші 0", "ОК");
+                    return;
+                }
+
+                // Збереження даних
                 bikeInCollection.Model = ModelEntry.Text?.Trim() ?? string.Empty;
                 bikeInCollection.FrameMaterial = FrameMaterialEntry.Text?.Trim() ?? string.Empty;
                 bikeInCollection.WheelDiameter = WheelDiameterEntry.Text?.Trim() ?? string.Empty;
                 bikeInCollection.Weight = WeightEntry.Text?.Trim() ?? string.Empty;
+                bikeInCollection.Type = TypeEntry.Text?.Trim() ?? string.Empty;
                 bikeInCollection.Description = DescriptionEntry.Text?.Trim() ?? string.Empty;
 
-                RewriteJson(mainPage.BikesCollection);
+                // Збереження оновленого списку у файл
+                RefactoryHelper.RewriteJson(mainPage.BikesCollection);
 
                 await DisplayAlert("Успіх", "Велосипед успішно збережено!", "OK");
 

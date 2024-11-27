@@ -24,60 +24,30 @@ namespace JSONEditor
 
             if (FilePath != null)
             {
-                UpdateBikeList();
-            }
-        }
-
-        /* Оновлює велосипеди в BikesCollection  */
-        private void UpdateBikeList()
-        {
-            if (string.IsNullOrEmpty(FilePath)) return;
-
-            try
-            {
-                string jsonContent = File.ReadAllText(FilePath);
-
-                var bikes = JsonSerializer.Deserialize<List<Bike>>(jsonContent, new JsonSerializerOptions
-                {
-                    PropertyNameCaseInsensitive = true
-                });
-
-                if (bikes != null)
-                {
-                    BikesCollection.Clear();
-                    foreach (var bike in bikes)
-                    {
-                        BikesCollection.Add(bike);
-                    }
-                }
-            }
-            catch (Exception)
-            {
-                DisplayAlert("Помилка", "Помилка під час обробки файлу.", "OK");
+                RefactoryHelper.UpdateBikeList(this, BikesCollection);
             }
         }
 
         /* Дія кнопки "Обрати файл" */
         private async void OpenFileHandler(object sender, EventArgs e)
         {
-            var customFileType = new FilePickerFileType(new Dictionary<DevicePlatform, IEnumerable<string>>
-            {
-                { DevicePlatform.WinUI, new[] { ".json" } }
-            });
-
             try
             {
-                var result = await FilePicker.PickAsync(new PickOptions { FileTypes = customFileType });
-                if (result != null)
+                FilePath = await RefactoryHelper.ChooseFile(this, new[] { ".json" });
+                if (FilePath == null)
                 {
-                    FilePath = result.FullPath;
-                    UpdateBikeList();
-                    FilePathLabel.Text = $"Обрано: {FilePath}";               
+                    return;
+                }
+                else
+                {
+                    FilePathLabel.Text = $"Обрано: {FilePath}";
+                    RefactoryHelper.UpdateBikeList(this, BikesCollection);
                 }
             }
-            catch (Exception)
+            catch(Exception ex) 
             {
-                await DisplayAlert("Помилка", "Не вірний файл!", "OK");
+                await DisplayAlert("Помилка", "Файл відкрився некоректно", "ОК");
+                return;
             }
         }
 
@@ -102,7 +72,7 @@ namespace JSONEditor
             }
         }
 
-        /* */
+        /* Дія кнопки "Пошук" */
         private async void SearchHandler(object sender, EventArgs e)
         {
             if (BikesCollection == null || !BikesCollection.Any())
@@ -113,16 +83,18 @@ namespace JSONEditor
 
             string modelFilter = ModelEntry.Text?.Trim().ToLower() ?? string.Empty;
             string frameMaterialFilter = FrameMaterialEntry.Text?.Trim().ToLower() ?? string.Empty;
-            string wheelDiameterFilter = WheelDiameterEntry.Text?.Trim().ToLower() ?? string.Empty;
-            string weightFilter = WeightEntry.Text?.Trim().ToLower() ?? string.Empty;
+            string wheelDiameterFilter = (WheelDiameterEntry.Text?.Trim().ToLower() ?? string.Empty).Replace('.', ',');
+            string weightFilter = (WeightEntry.Text?.Trim().ToLower() ?? string.Empty).Replace('.', ',');
             string typeFilter = TypeEntry.Text?.Trim().ToLower() ?? string.Empty;
             string descriptionFilter = DescriptionEntry.Text?.Trim().ToLower() ?? string.Empty;
 
             var filteredBikes = BikesCollection.Where(bike =>
                 (string.IsNullOrEmpty(modelFilter) || bike.Model.ToLower().Contains(modelFilter)) &&
                 (string.IsNullOrEmpty(frameMaterialFilter) || bike.FrameMaterial.ToLower().Contains(frameMaterialFilter)) &&
-                (string.IsNullOrEmpty(wheelDiameterFilter) || bike.WheelDiameter.ToLower().Contains(wheelDiameterFilter)) &&
-                (string.IsNullOrEmpty(weightFilter) || bike.Weight.ToLower().Contains(weightFilter)) &&
+                (string.IsNullOrEmpty(wheelDiameterFilter) || Double.TryParse(wheelDiameterFilter, out var wheelDiameterFilterValue) && 
+                Double.TryParse(bike.WheelDiameter, out var wheelDiameter) && wheelDiameter == wheelDiameterFilterValue) &&
+                (string.IsNullOrEmpty(weightFilter) || Double.TryParse(weightFilter, out var weightFilterValue) && 
+                Double.TryParse(bike.Weight, out var weight) && weight == weightFilterValue) &&
                 (string.IsNullOrEmpty(typeFilter) || bike.Type.ToLower().Contains(typeFilter)) &&
                 (string.IsNullOrEmpty(descriptionFilter) || bike.Description.ToLower().Contains(descriptionFilter))
             ).ToList();
@@ -134,7 +106,7 @@ namespace JSONEditor
             else
             {
                 await DisplayAlert("Результат", "Жоден велосипед не відповідає заданим критеріям пошуку.", "OK");
-                BikesCollectionView.ItemsSource = new ObservableCollection<Bike>();
+                return;
             }
         }
 
@@ -154,7 +126,8 @@ namespace JSONEditor
         {
             if (sender is Button button && button.BindingContext is Bike bike)
             {
-                await DisplayAlert("Опис велосипеда", bike.Description, "OK");
+                string description = string.IsNullOrWhiteSpace(bike.Description) ? "Тут пусто" : bike.Description;
+                await DisplayAlert("Опис велосипеда", description, "OK");
             }
         }
         
